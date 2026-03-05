@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa do Vitorino - Dashboard Premium</title>
+    <!-- CSS Stylesheet para Fase 2 -->
+    <link rel="stylesheet" href="styles.css?v=3">
+</head>
+
+<body>
+
+    <!-- Header & Slicers -->
+    <header>
+        <div class="brand-section">
+            <h1 class="brand-title">CASA DO VITORINO</h1>
+            <span class="brand-subtitle">Financial & ESG Dashboard</span>
+        </div>
+
+        <div class="slicers-container">
+            <div class="slicer-group">
+                <label for="num-casas">Escala (Casas)</label>
+                <select id="num-casas">
+                    <option value="1">1 Unidad</option>
+                    <option value="2">2 Unidades</option>
+                    <option value="3">3 Unidades</option>
+                    <option value="4">4 Unidades</option>
+                    <option value="5">5 Unidades</option>
+                </select>
+            </div>
+
+            <div class="slicer-group">
+                <label for="hab-por-casa">HabItaciones / Casa</label>
+                <select id="hab-por-casa">
+                    <option value="3">3 Habitaciones</option>
+                    <option value="4">4 Habitaciones</option>
+                    <option selected value="5">5 Habitaciones</option>
+                    <option value="6">6 Habitaciones</option>
+                    <option value="7">7 Habitaciones</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Grid 3x3 -->
+    <main class="dashboard-container">
+
+        <!-- Fila 1: KPIs Financieros Core -->
+        <div class="glass-card card-occupancy">
+            <div class="card-header">
+                <span class="card-title">Occupancy Rate</span>
+            </div>
+            <!-- Canvas container for Gauge Chart -->
+            <div class="chart-container"
+                style="position: relative; height:200px; width:100%; display:flex; justify-content:center; align-items:center;">
+                <canvas id="occGauge"></canvas>
+            </div>
+            <div class="kpi-value-placeholder" id="kpi-occ" style="text-align: center; font-size: 2rem;">--%</div>
+        </div>
+
+        <div class="glass-card card-adr">
+            <div class="card-header">
+                <span class="card-title">ADR (Average Daily Rate)</span>
+            </div>
+            <div class="kpi-value-placeholder" id="kpi-adr" style="font-size: 3rem;">€--</div>
+        </div>
+
+        <div class="glass-card card-revpar">
+            <div class="card-header">
+                <span class="card-title">RevPAR</span>
+            </div>
+            <!-- Canvas container for Bar Chart -->
+            <div class="chart-container" style="position: relative; height:150px; width:100%;">
+                <canvas id="revparChart"></canvas>
+            </div>
+            <div class="kpi-value-placeholder" id="kpi-revpar" style="font-size: 2rem; margin-top: 10px;">€--</div>
+        </div>
+
+        <!-- Fila 2: GOPPAR, NPS y Ventas Extra -->
+        <div class="glass-card card-goppar">
+            <div class="card-header">
+                <span class="card-title">GOP & Evolución Ingresos</span>
+            </div>
+            <!-- Canvas container for Line Chart -->
+            <div class="chart-container" style="position: relative; height:150px; width:100%;">
+                <canvas id="gopChart"></canvas>
+            </div>
+            <div class="kpi-value-placeholder" id="kpi-gop" style="font-size: 1.5rem; margin-top: 10px;">€--</div>
+        </div>
+
+        <div class="glass-card card-nps">
+            <div class="card-header">
+                <span class="card-title">NPS Score</span>
+            </div>
+            <div class="kpi-value-placeholder" id="kpi-nps">--</div>
+            <!-- Estrellas -->
+            <div class="kpi-subtext-placeholder" id="kpi-nps-stars"
+                style="font-size: 1.5rem; color: var(--primary-accent);">★★★★★</div>
+        </div>
+
+        <div class="glass-card card-ventas-extra">
+            <div class="card-header">
+                <span class="card-title">Ventas Extra (Upsell)</span>
+            </div>
+            <div class="kpi-value-placeholder" id="kpi-ventas-extra">€--</div>
+            <div class="kpi-subtext-placeholder">Estimación basada en Reservas</div>
+        </div>
+
+        <!-- Fila 3: ESG Eco-Cards -->
+        <div class="card-eco-row">
+            <div class="eco-card">
+                <div>
+                    <span class="card-title" style="display:block; margin-bottom: 8px;">Consumo Agua</span>
+                    <div class="kpi-value-placeholder" style="font-size: 2rem;" id="kpi-agua">-- L</div>
+                    <div class="kpi-subtext-placeholder">por Huésped (Target &lt;300L)</div>
+                </div>
+            </div>
+
+            <div class="eco-card">
+                <div>
+                    <span class="card-title" style="display:block; margin-bottom: 8px;">Consumo Energía</span>
+                    <div class="kpi-value-placeholder" style="font-size: 2rem;" id="kpi-energia">-- KWh</div>
+                    <div class="kpi-subtext-placeholder">por Huésped (Target &lt;18KWh)</div>
+                </div>
+            </div>
+
+            <div class="eco-card">
+                <div>
+                    <span class="card-title" style="display:block; margin-bottom: 8px;">Consumo Km 0</span>
+                    <div class="kpi-value-placeholder" style="font-size: 2rem;" id="kpi-km0">--%</div>
+                    <div class="kpi-subtext-placeholder">Productos locales (Target &gt;80%)</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Phase 3 Visualization Scripts -->
+    <!-- Incluyendo Chart.js para los gráficos solicitados (RevPAR barras, GOP línea, Gauge Occ) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="data_engine.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

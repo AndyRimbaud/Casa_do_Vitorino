@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+    /* Nueva Paleta Insignia (Basada en la imagen de referencia) */
+    --primary-accent: #92BD2E;
+    /* Verde Chive brillante / Insignia Casa do Vitorino */
+    --secondary-accent: #496A12;
+    /* Verde Oliva oscuro */
+    --card-bg: rgba(12, 43, 12, 0.75);
+    /* Verde Bosque profundo con 75% opacidad */
+    --border-glass: rgba(146, 189, 46, 0.2);
+    /* Borde cristal verde claro */
+    --text-main: #F5F5F5;
+    /* Blanco roto */
+    --text-secondary: #D9BEFF;
+    /* Lila/Lavanda para textos secundarios */
+    --status-danger: #A76595;
+    /* Magenta/Púrpura empolvado para alertas, en lugar de rojo */
+
+    /* Efecto Cristal (Refinado) */
+    --glass-blur: blur(15px) saturate(150%);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    /* Fondo del Alto Douro, Portugal (River with terraced vineyards) */
+    background-color: #0b1a0b;
+    background-image:
+        linear-gradient(rgba(12, 43, 12, 0.1), rgba(7, 26, 7, 0.4)),
+        url('https://images.unsplash.com/photo-1549487928-8b9fb68dd62f?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+}
+
+/* Header & Controls */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background: linear-gradient(to bottom, rgba(7, 26, 7, 0.9) 0%, transparent 100%);
+    z-index: 10;
+}
+
+.brand-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-size: 2.2rem;
+    letter-spacing: 4px;
+    /* Letter spacing ampliado para exclusividad */
+    color: var(--primary-accent);
+    /* Verde insignia aplicado al título */
+    text-transform: uppercase;
+    text-shadow: 0px 0px 15px rgba(146, 189, 46, 0.4);
+    /* Glow para destacar sobre fondo */
+}
+
+.brand-subtitle {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    /* Lavanda */
+    margin-top: 4px;
+    font-family: 'Inter', sans-serif;
+}
+
+.slicers-container {
+    display: flex;
+    gap: 24px;
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-glass);
+    padding: 12px 24px;
+    border-radius: 50px;
+    box-shadow: var(--glass-shadow);
+}
+
+.slicer-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.slicer-group label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+.slicer-group input,
+.slicer-group select {
+    background: rgba(12, 43, 12, 0.9);
+    border: 1px solid var(--border-glass);
+    color: var(--primary-accent);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.slicer-group input:focus,
+.slicer-group select:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 10px rgba(146, 189, 46, 0.4);
+}
+
+/* Main Dashboard Grid */
+.dashboard-container {
+    flex: 1;
+    padding: 24px 48px 48px 48px;
+    display: grid;
+    /* Grid 3x3 */
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Glassmorphism Card System */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-glass);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(146, 189, 46, 0.6);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    /* Textos de cabecera en Lila suave */
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+.kpi-value-placeholder {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--text-main);
+    margin: auto 0;
+}
+
+/* Destacar los valores positivos con el verde insignia */
+.kpi-value-placeholder.accentuated {
+    color: var(--primary-accent);
+}
+
+.kpi-subtext-placeholder {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+}
+
+/* Specific Grid Placements */
+.card-occupancy {
+    grid-column: span 1;
+}
+
+.card-adr {
+    grid-column: span 1;
+}
+
+.card-revpar {
+    grid-column: span 1;
+}
+
+.card-goppar {
+    grid-column: span 1;
+}
+
+.card-nps {
+    grid-column: span 1;
+}
+
+.card-ventas-extra {
+    grid-column: span 1;
+}
+
+.card-eco-row {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    backdrop-filter: none;
+}
+
+.eco-card {
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-glass);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.eco-card:hover {
+    border-color: rgba(146, 189, 46, 0.6);
+    background: rgba(20, 52, 20, 0.85);
+    /* Un poco más claro al hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .dashboard-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-eco-row {
+        grid-column: span 2;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .slicers-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card-occupancy,
+    .card-adr,
+    .card-revpar,
+    .card-goppar,
+    .card-nps,
+    .card-ventas-extra,
+    .card-eco-row {
+        grid-column: span 1;
+    }
+
+    .card-eco-row {
+        grid-template-columns: 1fr;
+    }
+}
