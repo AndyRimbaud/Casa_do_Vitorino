@@ -5,8 +5,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casa do Vitorino - Dashboard Premium</title>
-    <!-- CSS Stylesheet para Fase 2 -->
+    <!-- CSS Stylesheet original -->
     <link rel="stylesheet" href="styles.css?v=3">
+    
+    <style>
+        /* Estilos para el fondo paisajístico */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* Cargamos la imagen y le aplicamos una capa oscura (overlay) */
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('alto-douro.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Times New Roman', Times, serif; /* Siguiendo la estética clásica anterior */
+            color: white;
+        }
+
+        /* Efecto Glassmorphism para las tarjetas */
+        .glass-card, .eco-card {
+            background: rgba(255, 255, 255, 0.1) !important; /* Fondo semi-transparente */
+            backdrop-filter: blur(12px); /* Desenfoque del fondo */
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Ajustes de visibilidad para textos sobre el fondo oscuro */
+        .brand-title, .brand-subtitle, .card-title, .kpi-value-placeholder {
+            color: white !important;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        header {
+            background: rgba(85, 107, 47, 0.8); /* Verde oliva con transparencia */
+            padding: 20px;
+            border-bottom: 4px solid #FA8072; /* Acento salmón */
+            margin-bottom: 20px;
+        }
+
+        .slicer-group label {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Contenedor principal */
+        .dashboard-container {
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Fila de tarjetas ESG */
+        .card-eco-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            grid-column: span 3;
+        }
+
+        .eco-card {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,10 +80,10 @@
             <span class="brand-subtitle">Financial & ESG Dashboard</span>
         </div>
 
-        <div class="slicers-container">
+        <div class="slicers-container" style="display: flex; gap: 20px; margin-top: 15px;">
             <div class="slicer-group">
                 <label for="num-casas">Escala (Casas)</label>
-                <select id="num-casas">
+                <select id="num-casas" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid white;">
                     <option value="1">1 Unidad</option>
                     <option value="2">2 Unidades</option>
                     <option value="3">3 Unidades</option>
@@ -31,11 +93,11 @@
             </div>
 
             <div class="slicer-group">
-                <label for="hab-por-casa">HabItaciones / Casa</label>
-                <select id="hab-por-casa">
+                <label for="hab-por-casa">Habitaciones / Casa</label>
+                <select id="hab-por-casa" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid white;">
                     <option value="3">3 Habitaciones</option>
                     <option value="4">4 Habitaciones</option>
-                    <option selected value="5">5 Habitaciones</option>
+                    <option value="5" selected>5 Habitaciones</option>
                     <option value="6">6 Habitaciones</option>
                     <option value="7">7 Habitaciones</option>
                 </select>
@@ -43,101 +105,87 @@
         </div>
     </header>
 
-    <!-- Main Dashboard Grid 3x3 -->
-    <main class="dashboard-container">
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: auto;">
 
-        <!-- Fila 1: KPIs Financieros Core -->
-        <div class="glass-card card-occupancy">
+        <!-- Fila 1 -->
+        <div class="glass-card card-occupancy" style="padding: 20px;">
             <div class="card-header">
                 <span class="card-title">Occupancy Rate</span>
             </div>
-            <!-- Canvas container for Gauge Chart -->
-            <div class="chart-container"
-                style="position: relative; height:200px; width:100%; display:flex; justify-content:center; align-items:center;">
+            <div class="chart-container" style="height:150px; display:flex; justify-content:center;">
                 <canvas id="occGauge"></canvas>
             </div>
             <div class="kpi-value-placeholder" id="kpi-occ" style="text-align: center; font-size: 2rem;">--%</div>
         </div>
 
-        <div class="glass-card card-adr">
+        <div class="glass-card card-adr" style="padding: 20px; text-align: center;">
             <div class="card-header">
                 <span class="card-title">ADR (Average Daily Rate)</span>
             </div>
-            <div class="kpi-value-placeholder" id="kpi-adr" style="font-size: 3rem;">€--</div>
+            <div class="kpi-value-placeholder" id="kpi-adr" style="font-size: 3rem; margin-top: 40px;">€--</div>
         </div>
 
-        <div class="glass-card card-revpar">
+        <div class="glass-card card-revpar" style="padding: 20px;">
             <div class="card-header">
                 <span class="card-title">RevPAR</span>
             </div>
-            <!-- Canvas container for Bar Chart -->
-            <div class="chart-container" style="position: relative; height:150px; width:100%;">
+            <div class="chart-container" style="height:120px;">
                 <canvas id="revparChart"></canvas>
             </div>
-            <div class="kpi-value-placeholder" id="kpi-revpar" style="font-size: 2rem; margin-top: 10px;">€--</div>
+            <div class="kpi-value-placeholder" id="kpi-revpar" style="font-size: 2rem; text-align: center;">€--</div>
         </div>
 
-        <!-- Fila 2: GOPPAR, NPS y Ventas Extra -->
-        <div class="glass-card card-goppar">
+        <!-- Fila 2 -->
+        <div class="glass-card card-goppar" style="padding: 20px;">
             <div class="card-header">
                 <span class="card-title">GOP & Evolución Ingresos</span>
             </div>
-            <!-- Canvas container for Line Chart -->
-            <div class="chart-container" style="position: relative; height:150px; width:100%;">
+            <div class="chart-container" style="height:120px;">
                 <canvas id="gopChart"></canvas>
             </div>
-            <div class="kpi-value-placeholder" id="kpi-gop" style="font-size: 1.5rem; margin-top: 10px;">€--</div>
+            <div class="kpi-value-placeholder" id="kpi-gop" style="font-size: 1.5rem; text-align: center;">€--</div>
         </div>
 
-        <div class="glass-card card-nps">
+        <div class="glass-card card-nps" style="padding: 20px; text-align: center;">
             <div class="card-header">
                 <span class="card-title">NPS Score</span>
             </div>
-            <div class="kpi-value-placeholder" id="kpi-nps">--</div>
-            <!-- Estrellas -->
-            <div class="kpi-subtext-placeholder" id="kpi-nps-stars"
-                style="font-size: 1.5rem; color: var(--primary-accent);">★★★★★</div>
+            <div class="kpi-value-placeholder" id="kpi-nps" style="font-size: 3rem;">--</div>
+            <div class="kpi-subtext-placeholder" id="kpi-nps-stars" style="font-size: 1.5rem; color: #FA8072;">★★★★★</div>
         </div>
 
-        <div class="glass-card card-ventas-extra">
+        <div class="glass-card card-ventas-extra" style="padding: 20px; text-align: center;">
             <div class="card-header">
                 <span class="card-title">Ventas Extra (Upsell)</span>
             </div>
-            <div class="kpi-value-placeholder" id="kpi-ventas-extra">€--</div>
+            <div class="kpi-value-placeholder" id="kpi-ventas-extra" style="font-size: 2.5rem; margin-top: 20px;">€--</div>
             <div class="kpi-subtext-placeholder">Estimación basada en Reservas</div>
         </div>
 
-        <!-- Fila 3: ESG Eco-Cards -->
+        <!-- Fila 3: ESG -->
         <div class="card-eco-row">
             <div class="eco-card">
-                <div>
-                    <span class="card-title" style="display:block; margin-bottom: 8px;">Consumo Agua</span>
-                    <div class="kpi-value-placeholder" style="font-size: 2rem;" id="kpi-agua">-- L</div>
-                    <div class="kpi-subtext-placeholder">por Huésped (Target &lt;300L)</div>
-                </div>
+                <span class="card-title">Consumo Agua</span>
+                <div class="kpi-value-placeholder" id="kpi-agua">-- L</div>
+                <div class="kpi-subtext-placeholder">por Huésped (Target &lt;300L)</div>
             </div>
 
             <div class="eco-card">
-                <div>
-                    <span class="card-title" style="display:block; margin-bottom: 8px;">Consumo Energía</span>
-                    <div class="kpi-value-placeholder" style="font-size: 2rem;" id="kpi-energia">-- KWh</div>
-                    <div class="kpi-subtext-placeholder">por Huésped (Target &lt;18KWh)</div>
-                </div>
+                <span class="card-title">Consumo Energía</span>
+                <div class="kpi-value-placeholder" id="kpi-energia">-- KWh</div>
+                <div class="kpi-subtext-placeholder">por Huésped (Target &lt;18KWh)</div>
             </div>
 
             <div class="eco-card">
-                <div>
-                    <span class="card-title" style="display:block; margin-bottom: 8px;">Consumo Km 0</span>
-                    <div class="kpi-value-placeholder" style="font-size: 2rem;" id="kpi-km0">--%</div>
-                    <div class="kpi-subtext-placeholder">Productos locales (Target &gt;80%)</div>
-                </div>
+                <span class="card-title">Consumo Km 0</span>
+                <div class="kpi-value-placeholder" id="kpi-km0">--%</div>
+                <div class="kpi-subtext-placeholder">Productos locales (Target &gt;80%)</div>
             </div>
         </div>
 
     </main>
 
-    <!-- Phase 3 Visualization Scripts -->
-    <!-- Incluyendo Chart.js para los gráficos solicitados (RevPAR barras, GOP línea, Gauge Occ) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="data_engine.js"></script>
     <script src="dashboard.js"></script>
